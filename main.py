@@ -30,7 +30,7 @@ while option!="0":
 	if option=="1":
 		list_name = input("Enter the name of the list: ")
 		url = input("Enter the new url: ")
-		os.system("cd && cd Música && mkdir "+list_name+"&& cd "+list_name+" && youtube-dl --ignore-errors --literal --extract-audio --audio-format mp3 "+url)
+		os.system("cd && cd Música && mkdir "+list_name+"&& cd "+list_name+" && youtube-dl --ignore-errors -o '%(title)s.%(ext)s'  --extract-audio --audio-format mp3 --audio-quality 0 "+url)
 		a_dict = {list_name: url}
 		with open('db.json') as f:
 			data = json.load(f)
@@ -43,7 +43,7 @@ while option!="0":
 		json_data = open('db.json')
 		data = json.load(json_data)
 		for key in data:
-			os.system("cd && cd Música && cd "+key+" && youtube-dl --ignore-errors --literal --extract-audio --audio-format mp3 "+data[key])
+			os.system("cd && cd Música && cd "+key+" && youtube-dl --ignore-errors -o '%(title)s.%(ext)s'  --extract-audio --audio-format mp3 --audio-quality 0 "+data[key])
 
 	elif option=="3":
 		print("Starting to open the database")
@@ -95,6 +95,6 @@ while option!="0":
 	elif option==6:
 		print("This song will be added to 'RandomSongs' directory")
 		url = input("Enter the new url: ")
-		os.system("cd && cd Música && cd RandomSongs && youtube-dl --ignore-errors --literal --extract-audio --audio-format mp3 "+url)
+		os.system("cd && cd Música && cd RandomSongs && youtube-dl --ignore-errors -o '%(title)s.%(ext)s'  --extract-audio --audio-format mp3 --audio-quality 0 "+url)
 
 

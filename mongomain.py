@@ -39,8 +39,24 @@ while option!="0":
 	elif option=="2":
 		print("Starting to open the database")
 		y_update = youtufy.find({'update':'y'})
-		for key in y_update:
-			os.system("cd && cd Música && cd "+key['name']+" && youtube-dl --ignore-errors -o '%(title)s.%(ext)s'  --extract-audio --audio-format mp3 --audio-quality 0 "+key['url'])
+		multiple = input("Do you want to get update one or more playlist? \n \t 1--> All \n \t 2-->One ")
+		if multiple =="1":
+			for key in y_update:
+				os.system("cd && cd Música && cd "+key['name']+" && youtube-dl --ignore-errors -o '%(title)s.%(ext)s'  --extract-audio --audio-format mp3 --audio-quality 0 "+key['url'])
+		elif multiple=="2":
+			i=0
+			urls=[]
+			names=[]
+			for key in y_all:
+				i+=1
+				print(i,". \t"+key["name"])
+				urls.append(key["url"])
+				names.append(key["name"])
+			selection= input("Select the number of the playlist you want to erase: ")
+			if selection>0:
+				os.system("cd && cd Música && cd "+names[int(selection)-1]+" && youtube-dl --ignore-errors -o '%(title)s.%(ext)s'  --extract-audio --audio-format mp3 --audio-quality 0 "+urls[int(selection)-1])
+		else:
+			print("You didn't choose a valid option")
 
 	elif option=="3":
 		print("Starting to open the database")
