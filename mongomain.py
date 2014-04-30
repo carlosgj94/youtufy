@@ -32,18 +32,19 @@ while option!="0":
 		list_name = input("Enter the name of the list: ")
 		url = input("Enter the new url: ")
 		update = input("Do you want to keep update the playlist? (y/n): ")
-		os.system("cd && cd Música && mkdir "+list_name+"&& cd "+list_name+" && youtube-dl --ignore-errors -o '%(title)s.%(ext)s'  --extract-audio --audio-format mp3 --audio-quality 0 "+url)
 		a_dict = {"name":list_name, "url": url, "update":update}
 		youtufy.insert(a_dict)
+		os.system("cd && cd Música && mkdir "+list_name+"&& cd "+list_name+" && youtube-dl --ignore-errors -o '%(title)s.%(ext)s'  --extract-audio --audio-format mp3 --audio-quality 0 "+url)		
 
 	elif option=="2":
 		print("Starting to open the database")
 		y_update = youtufy.find({'update':'y'})
-		multiple = input("Do you want to get update one or more playlist? \n \t 1--> All \n \t 2-->One ")
+		multiple = input("Do you want to get update one or more playlist? \n \t 1--> All \n \t 2-->One \n")
 		if multiple =="1":
 			for key in y_update:
 				os.system("cd && cd Música && cd "+key['name']+" && youtube-dl --ignore-errors -o '%(title)s.%(ext)s'  --extract-audio --audio-format mp3 --audio-quality 0 "+key['url'])
 		elif multiple=="2":
+			y_all = youtufy.find()
 			i=0
 			urls=[]
 			names=[]
@@ -52,7 +53,7 @@ while option!="0":
 				print(i,". \t"+key["name"])
 				urls.append(key["url"])
 				names.append(key["name"])
-			selection= input("Select the number of the playlist you want to erase: ")
+			selection= input("Select the number of the playlist you want to update: ")
 			if selection>0:
 				os.system("cd && cd Música && cd "+names[int(selection)-1]+" && youtube-dl --ignore-errors -o '%(title)s.%(ext)s'  --extract-audio --audio-format mp3 --audio-quality 0 "+urls[int(selection)-1])
 		else:
