@@ -102,7 +102,7 @@ while option!="0":
 									print("Son igualicos illo")
 									os.system("cd && cd Música/"+key["name"]+" && rm -r "+re.escape(file1))
 
-	elif option==6:
+	elif option=="6":
 		print("This song will be added to 'RandomSongs' directory")
 		url = input("Enter the new url: ")
 		os.system("cd && cd Música && cd RandomSongs && youtube-dl --ignore-errors -o '%(title)s.%(ext)s'  --extract-audio --audio-format mp3 --audio-quality 0 "+url)
